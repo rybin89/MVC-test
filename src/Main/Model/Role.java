@@ -19,7 +19,7 @@ public class Role {
     public static final String ROLE_TABLE_NAME = "name";
 
     //метод вывода данных таблицы Role
-    public static void  getRole() throws SQLException, ClassNotFoundException {
+    public HashMap<Integer, String>  getRole() throws SQLException, ClassNotFoundException {
 
         //переменная с текстом запроса
         String query = "SELECT * FROM " + ROLE_TABLE;
@@ -31,10 +31,35 @@ public class Role {
         while (resultSet.next()){
             arrayRole.put(resultSet.getInt(1),resultSet.getString(2));
         }
-        arrayRole.forEach((Integer id, String name)->{
-            System.out.println(id +": " + name);
-        });
+        return arrayRole;
+    }
+    //метод добавления данных в таблицу Role
+    public void newRole(String role) throws SQLException, ClassNotFoundException {
+        String query = "INSERT INTO " + ROLE_TABLE + "(" + ROLE_TABLE_NAME + ") VALUES " +
+                "('" + role + "')";
 
+        Statement statement = getDbConnection().createStatement();
+        statement.executeUpdate(query);
+    }
+    //метод обновления данных в таблицу Role
+    public void updateName(Integer id, String newRole) throws SQLException, ClassNotFoundException {
+        //Запрос на обновление записи присвоив записи ROLE_TABLE_NAME новое имя newRole указав его идентификатор id
+//        String query = "UPDATE " + ROLE_TABLE + "SET"+ ROLE_TABLE_NAME + " = " + newRole + " WHERE " + ROLE_TABLE_ID +" = " + id;
+        String query = "UPDATE Roles SET name = '"+ newRole + "' WHERE id = " + id;
+        Statement statement = getDbConnection().createStatement();
+        statement.executeUpdate(query);
+    }
+
+    //метод удаления данных в таблицу Role
+    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+
+        String query = "DELETE FROM " + ROLE_TABLE + " WHERE " + ROLE_TABLE_ID + " = " + id ;
+        if(id!=1){
+            Statement statement = getDbConnection().createStatement();
+            statement.executeUpdate(query);
+        } else {
+            System.out.println("Эту роль нельзя удалять!!!");
+        }
 
     }
 }

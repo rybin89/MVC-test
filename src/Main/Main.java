@@ -1,7 +1,11 @@
 package Main;
+import Main.Model.Role;
+
 import java.sql.SQLException;
 import java.util.Scanner;
-import static Main.Model.Role.getRole;
+
+import static Main.Controller.RoleController.*;
+
 
 public class Main {
 
@@ -12,10 +16,14 @@ public class Main {
         String login;
         String password;
 
+//вывод данных таблицы Role
+//          printRole();
 
-          getRole();
-
-
-
+        //добавить данные таблицу Role
+//        setRole();
+//обновит данные таблицы Role
+//        updateNameRole();
+//удалить данные таблицы Role
+        deleteRole();
     }
 }
