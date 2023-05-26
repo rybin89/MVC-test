@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
 
+import static Main.DataBase.Const.*;
 import static Main.DataBase.DataBaseHandler.getDbConnection;
 
 
@@ -14,9 +15,7 @@ public class Role {
     static DataBaseHandler  queryGet;
     Integer id;
     String nameRole;
-    public static final String ROLE_TABLE = "Roles";
-    public static final String ROLE_TABLE_ID = "id";
-    public static final String ROLE_TABLE_NAME = "name";
+
 
     //метод вывода данных таблицы Role
     public HashMap<Integer, String>  getRole() throws SQLException, ClassNotFoundException {
