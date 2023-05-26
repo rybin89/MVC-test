@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import static Main.Controller.RoleController.*;
+import static Main.Controller.UserController.printAllUser;
+import static Main.Test.ArrayListTest.userList;
 
 
 public class Main {
@@ -24,6 +26,10 @@ public class Main {
 //обновит данные таблицы Role
 //        updateNameRole();
 //удалить данные таблицы Role
-        deleteRole();
+//        deleteRole();
+
+//        printAllUser();
+        System.out.println(userList()[0].getId() + userList()[0].getName() );
     }
+
 }
