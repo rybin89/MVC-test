@@ -6,7 +6,6 @@ import static Main.DataBase.DataBaseHandler.getDbConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 
 public class User {
@@ -19,7 +18,7 @@ public class User {
     public User() {
     }
 
-    ;
+
 
     public User(int id,
                 int roleId,
@@ -44,33 +43,33 @@ public class User {
     public static User[] getUser() throws SQLException, ClassNotFoundException {
 
         String sql = "SELECT * FROM " + USER_TABLE;
-        String countUser = "SELECT COUNT(*) FROM " + USER_TABLE;
+        String countUser = "SELECT COUNT(*) AS count FROM " + USER_TABLE;
+
+        ResultSet resultCount = statement(countUser);
+
+        int count = 0;
+        while (resultCount.next()){
+            count = resultCount.getInt("count");
+        }
+        User[] arrayUser = new User[count];
         ResultSet resultSet = statement(sql);
-        ResultSet count = statement(countUser);
+        int i = 0;
+        while (resultSet.next()){
+
+            arrayUser[i] = new User(resultSet.getInt("id"),
+                    resultSet.getInt("role_id"),
+                    resultSet.getString("name"),
+                    resultSet.getString("login"),
+                    resultSet.getString("password")
+                    );
+            i++;
+
+        }
         ////Ассоциативный массив из таблицы
-        User[] arrayList = new User[count.getInt(1)];
-        for (int i = 0; i < arrayList.length; i++) {
-            arrayList[i] = new User(
-                    resultSet.getInt(1),
-                    resultSet.getInt(2),
-                    resultSet.getString(3),
-                    resultSet.getString(4),
-                    resultSet.getString(5));
-            System.out.println(arrayList[i]);
-        }
-
-        return arrayList;
+        return arrayUser;
 
     }
-    public void getArrayList() throws SQLException, ClassNotFoundException {
 
-        for (int i = 0; i < getUser().length; i++) {
-
-            System.out.println(getUser()[i]);
-
-        }
-
-    }
 
     public Integer getId() {
         return id;

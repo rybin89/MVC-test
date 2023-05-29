@@ -28,8 +28,12 @@ public class Main {
 //удалить данные таблицы Role
 //        deleteRole();
 
-//        printAllUser();
-        System.out.println(userList()[0].getId() + userList()[0].getName() );
+        printAllUser();
+//        System.out.println(userList()[0].getId() + userList()[0].getName() );
+//        for (int i =0; i< userList().length; i++ ){
+//            System.out.println(userList()[i].getId() + userList()[i].getName() );
+//        }
+
     }
 
 }
