@@ -2,10 +2,10 @@ package Main.DataBase;
 
 public class Config {
     // параметры подключения к БД
-    protected String host = "31.31.196.54";
-    protected String port = "3306";
-    protected static String login = "u1895386_testoff";
-    protected static String password = "!I212189";
-    protected String name = "u1895386_default";
+    protected static String host = "194.247.184.209";
+    protected static String port = "443";
+    protected static String login = "rybin1_testoff";
+    protected static String password = "!I892121";
+    protected static String name = "rybin1_jurYPAT";
 
 }
