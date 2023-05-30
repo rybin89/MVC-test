@@ -24,6 +24,7 @@ public class RoleController extends Role {
         Scanner input = new Scanner(System.in);
         System.out.println("Введите РОЛЬ");
         getrole.newRole(input.nextLine());
+
         printRole();
 
     }

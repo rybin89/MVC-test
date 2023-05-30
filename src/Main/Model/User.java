@@ -15,9 +15,10 @@ public class User {
     private String login;
     private String password;
 
+    private String query;
+
     public User() {
     }
-
 
 
     public User(int id,
@@ -48,20 +49,20 @@ public class User {
         ResultSet resultCount = statement(countUser);
 
         int count = 0;
-        while (resultCount.next()){
+        while (resultCount.next()) {
             count = resultCount.getInt("count");
         }
         User[] arrayUser = new User[count];
         ResultSet resultSet = statement(sql);
         int i = 0;
-        while (resultSet.next()){
+        while (resultSet.next()) {
 
             arrayUser[i] = new User(resultSet.getInt("id"),
                     resultSet.getInt("role_id"),
                     resultSet.getString("name"),
                     resultSet.getString("login"),
                     resultSet.getString("password")
-                    );
+            );
             i++;
 
         }
@@ -70,12 +71,63 @@ public class User {
 
     }
 
+    //Вывод однго пользователя
+    public User getOneUser(Integer id) throws SQLException, ClassNotFoundException {
+        User user = new User();
+        query = "SELECT * FROM " + USER_TABLE + " WHERE " + USER_TABLE_ID + " = " + id;
 
-    public Integer getId() {
+        Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
+        ResultSet resultSet = statement.executeQuery(query);
+
+        while (resultSet.next()) {
+            user = new User(resultSet.getInt("id"), resultSet.getInt("role_id"),
+                    resultSet.getString("name"), resultSet.getString("login"),
+                    resultSet.getString("password"));
+        }
+        return user;
+    }
+
+    //метод добавления данных в таблицу
+    public void createUser(String name,
+                           String login,
+                           String password,
+                           int roleId) throws SQLException, ClassNotFoundException {
+        query = "INSERT INTO Users (" + USER_TABLE_LOGIN + ","
+                + USER_TABLE_NAME + ","
+                + USER_TABLE_PASSWORD + ","
+                + USER_TABLE_ROLE_ID + ") " +
+                "VALUES ('" + login + "','" + name + "', '" + password + " ', " + roleId + ")";
+        Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
+        statement.executeUpdate(query);
+    }
+
+    //метод обновления данных в таблицу
+    public void updateLogin(String login, Integer id) throws SQLException, ClassNotFoundException {
+
+        query = "UPDATE " + USER_TABLE + " set " + USER_TABLE_LOGIN + " = '" + login + "' where " + USER_TABLE_ID + " = " + id;
+        Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
+        statement.executeUpdate(query);
+
+    }
+
+    //метод удаления данных в таблицу
+    public void delete(Integer id) throws SQLException, ClassNotFoundException {
+        query = "DELETE FROM " +USER_TABLE + " WHERE " + USER_TABLE_ID + " = "+id;
+        Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
+        statement.executeUpdate(query);
+    }
+
+    //геттеры
+
+    public int getId() {
         return id;
     }
 
-    public Integer getRoleId() {
+    public int getRoleId() {
         return roleId;
     }
 
@@ -90,30 +142,4 @@ public class User {
     public String getPassword() {
         return password;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    //метод добавления данных в таблицу
-
-    //метод обновления данных в таблицу
-
-    //метод удаления данных в таблицу
-
 }

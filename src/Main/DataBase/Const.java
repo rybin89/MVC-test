@@ -4,6 +4,7 @@ public class Const {
 //    констаеты для работы с таблицами и записями БД
     public static final String USER_TABLE = "Users";
     public static final String USER_TABLE_ID = "id";
+    public static final String USER_TABLE_ROLE_ID = "role_id";
     public static final String USER_TABLE_NAME = "name";
     public static final String USER_TABLE_LOGIN = "login";
     public static final String USER_TABLE_PASSWORD = "password";

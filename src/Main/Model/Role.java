@@ -38,6 +38,7 @@ public class Role {
                 "('" + role + "')";
 
         Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
         statement.executeUpdate(query);
     }
     //метод обновления данных в таблицу Role
@@ -46,6 +47,7 @@ public class Role {
 //        String query = "UPDATE " + ROLE_TABLE + "SET"+ ROLE_TABLE_NAME + " = " + newRole + " WHERE " + ROLE_TABLE_ID +" = " + id;
         String query = "UPDATE Roles SET name = '"+ newRole + "' WHERE id = " + id;
         Statement statement = getDbConnection().createStatement();
+        System.out.println(query);
         statement.executeUpdate(query);
     }
 
